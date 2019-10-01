@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 router.post('/register', (req, res) => {
     let nickname = req.body['nickname'];
-    let token = crypto.randomBytes(20).toString('hex');
+    let token = crypto.randomBytes(10).toString('hex');
     pool.query('INSERT INTO players(nickname, token, points) VALUES ($1, $2, $3)', [nickname, token, 0], (error, results) => {
         if(error){
             res.status(400).json({"success": "false"});
