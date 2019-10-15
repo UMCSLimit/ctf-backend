@@ -6,6 +6,7 @@ const playersRouter = require('./routes/players');
 const app = express();
 
 app.use(express.json());
+app.use('/static', express.static('public'))
 app.use(express.urlencoded());
 app.use(cors());
 app.use('/check', checkRouter);
