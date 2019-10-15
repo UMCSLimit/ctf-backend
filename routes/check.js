@@ -16,7 +16,7 @@ router.post('/answer', (req, res) => {
         if(error){
             console.log(error);
         }
-        if(results.rows[0]){
+        if(results !== undefined){
             player_id = results.rows[0]['id'];
             player_points = results.rows[0]['points'];
 
@@ -24,12 +24,15 @@ router.post('/answer', (req, res) => {
                 if(error1){
                     res.status(400).json({"success": "false"});
                 }
-                if(flag === results1.rows[0]['flag']){
-                    pool.query('UPDATE players SET points=$1 WHERE id=$2', [(player_points + results1.rows[0]['points']), player_id]);
-                    res.status(200).json({"correct" : "true", "points" : (player_points + results1.rows[0]['points']).toString()});
-                }
-                else{
-                    res.status(200).json({"correct" : "false"});
+                if(results1 !== undefined)
+                {
+                    if(flag === results1.rows[0]['flag']){
+                        pool.query('UPDATE players SET points=$1 WHERE id=$2', [(player_points + results1.rows[0]['points']), player_id]);
+                        res.status(200).json({"correct" : "true", "points" : (player_points + results1.rows[0]['points']).toString()});
+                    }
+                    else{
+                        res.status(200).json({"correct" : "false"});
+                    }
                 }
             });
         }
