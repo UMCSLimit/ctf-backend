@@ -29,7 +29,10 @@ router.get('/getplayer/:token', (req, res) => {
         if(error){
             res.status(400).json({"success": "false"});
         }
-        res.status(200).json(results.rows);
+        if(results.rows[0] !== undefined)
+        {
+            res.status(200).json(results.rows[0]);
+        }
     });
 });
 
