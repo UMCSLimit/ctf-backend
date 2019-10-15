@@ -26,7 +26,7 @@ router.post('/answer', (req, res) => {
                 }
                 if(flag === results1.rows[0]['flag']){
                     pool.query('UPDATE players SET points=$1 WHERE id=$2', [(player_points + results1.rows[0]['points']), player_id]);
-                    res.status(200).json({"correct" : "true"});
+                    res.status(200).json({"correct" : "true", "points" : (player_points + results1.rows[0]['points']).toString()});
                 }
                 else{
                     res.status(200).json({"correct" : "false"});
