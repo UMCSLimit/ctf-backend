@@ -8,9 +8,9 @@ router.get('/', (req, res) => {
         if(error){
             res.status(400).json({"success": "false"});
         }
-        if(results.rows[0] !== undefined)
+        if(results.rows !== undefined)
         {
-            res.status(200).json(results.rows[0]);
+            res.status(200).json(results.rows);
         }
     })
 });
