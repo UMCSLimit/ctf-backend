@@ -16,7 +16,7 @@ router.post('/answer', (req, res) => {
         if(error){
             console.log(error);
         }
-        if(results.rows[0] != undefined){
+        if(results.rows[0] !== undefined){
             player_id = results.rows[0]['id'];
             player_points = results.rows[0]['points'];
 
@@ -24,7 +24,7 @@ router.post('/answer', (req, res) => {
                 if(error1){
                     res.status(400).json({"success": "false"});
                 }
-                if(results1.rows[0] != undefined)
+                if(results1.rows[0] !== undefined)
                 {
                     if(flag === results1.rows[0]['flag']){
                         pool.query('UPDATE players SET points=$1 WHERE id=$2', [(player_points + results1.rows[0]['points']), player_id]);
